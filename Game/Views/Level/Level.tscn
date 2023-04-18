@@ -1,0 +1,84 @@
+[gd_scene load_steps=16 format=3 uid="uid://b4m16q4iwtgj5"]
+
+[ext_resource type="Script" path="res://Game/Views/Level/Level.gd" id="1_ppd7t"]
+[ext_resource type="Texture2D" uid="uid://dqpfqfjwkwie" path="res://Assets/Sprites/tile-brown1.png" id="2_f2yb1"]
+[ext_resource type="Texture2D" uid="uid://barg36fi3sngj" path="res://Assets/Sprites/tile-dirt1.png" id="3_jm1n4"]
+[ext_resource type="Texture2D" uid="uid://cyfxes5nn006r" path="res://Assets/Sprites/tile-grass1.png" id="4_ogliw"]
+[ext_resource type="Texture2D" uid="uid://hc5havvqi56m" path="res://Assets/Sprites/head-red.png" id="5_ol3rm"]
+[ext_resource type="Texture2D" uid="uid://grj4df7lhbro" path="res://Assets/Sprites/body-green.png" id="6_p7ie6"]
+[ext_resource type="Texture2D" uid="uid://cmjq3e34s30jb" path="res://Assets/Sprites/legs-blue.png" id="7_nfp1j"]
+
+[sub_resource type="Gradient" id="Gradient_6j8qk"]
+colors = PackedColorArray(0.931549, 0.787493, 0.949042, 1, 0.495468, 0.906191, 0.987032, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tdrj0"]
+gradient = SubResource("Gradient_6j8qk")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.509174, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hasm7"]
+texture = ExtResource("2_f2yb1")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwnt7"]
+texture = ExtResource("3_jm1n4")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r68df"]
+texture = ExtResource("4_ogliw")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2sst1"]
+sources/0 = SubResource("TileSetAtlasSource_hasm7")
+sources/1 = SubResource("TileSetAtlasSource_gwnt7")
+sources/2 = SubResource("TileSetAtlasSource_r68df")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x3qct"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pggm6"]
+radius = 32.0
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_ppd7t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = SubResource("GradientTexture2D_tdrj0")
+metadata/_edit_lock_ = true
+
+[node name="TileMap" type="TileMap" parent="CanvasLayer"]
+scale = Vector2(5, 5)
+tile_set = SubResource("TileSet_2sst1")
+format = 2
+layer_0/tile_data = PackedInt32Array(524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0, 393228, 2, 0, 393229, 2, 0, 393230, 2, 0, 393231, 2, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(632, 560)
+shape = SubResource("WorldBoundaryShape2D_x3qct")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(216, 344)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_pggm6")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(3, -113)
+scale = Vector2(4, 4)
+texture = ExtResource("5_ol3rm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(3, -57)
+scale = Vector2(4, 4)
+texture = ExtResource("6_p7ie6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(3, -1)
+scale = Vector2(4, 4)
+texture = ExtResource("7_nfp1j")
