@@ -1,12 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4m16q4iwtgj5"]
+[gd_scene load_steps=32 format=3 uid="uid://b4m16q4iwtgj5"]
 
 [ext_resource type="Script" path="res://Game/Views/Level/Level.gd" id="1_ppd7t"]
 [ext_resource type="Texture2D" uid="uid://dqpfqfjwkwie" path="res://Assets/Sprites/tile-brown1.png" id="2_f2yb1"]
 [ext_resource type="Texture2D" uid="uid://barg36fi3sngj" path="res://Assets/Sprites/tile-dirt1.png" id="3_jm1n4"]
 [ext_resource type="Texture2D" uid="uid://cyfxes5nn006r" path="res://Assets/Sprites/tile-grass1.png" id="4_ogliw"]
-[ext_resource type="Texture2D" uid="uid://hc5havvqi56m" path="res://Assets/Sprites/head-red.png" id="5_ol3rm"]
-[ext_resource type="Texture2D" uid="uid://grj4df7lhbro" path="res://Assets/Sprites/body-green.png" id="6_p7ie6"]
-[ext_resource type="Texture2D" uid="uid://cmjq3e34s30jb" path="res://Assets/Sprites/legs-blue.png" id="7_nfp1j"]
+[ext_resource type="PackedScene" uid="uid://yfveb8geort7" path="res://Game/Dropper/Dropper.tscn" id="6_mu07p"]
+[ext_resource type="Texture2D" uid="uid://cmqu6157wpx2e" path="res://Assets/Sprites/dropper-buttons.png" id="7_381gt"]
+[ext_resource type="AudioStream" uid="uid://7xj0cctx8r87" path="res://Assets/SFX/spit.mp3" id="8_vcc1a"]
 
 [sub_resource type="Gradient" id="Gradient_6j8qk"]
 colors = PackedColorArray(0.931549, 0.787493, 0.949042, 1, 0.495468, 0.906191, 0.987032, 1)
@@ -35,26 +35,88 @@ sources/2 = SubResource("TileSetAtlasSource_r68df")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x3qct"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pggm6"]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bepe7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8pe1"]
+atlas = ExtResource("7_381gt")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi7d8"]
+atlas = ExtResource("7_381gt")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s447o"]
+atlas = ExtResource("7_381gt")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scgnh"]
+atlas = ExtResource("7_381gt")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aokhi"]
+load_path = "res://.godot/imported/dropper-buttons.png-f689ecaca5633f1fcffd69651746f2c0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2tw8"]
+atlas = SubResource("CompressedTexture2D_aokhi")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1du6i"]
+load_path = "res://.godot/imported/dropper-buttons.png-f689ecaca5633f1fcffd69651746f2c0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwd5l"]
+atlas = SubResource("CompressedTexture2D_1du6i")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4a6m2"]
+load_path = "res://.godot/imported/dropper-buttons.png-f689ecaca5633f1fcffd69651746f2c0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtty1"]
+atlas = SubResource("CompressedTexture2D_4a6m2")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c84d8"]
+load_path = "res://.godot/imported/dropper-buttons.png-f689ecaca5633f1fcffd69651746f2c0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga2oq"]
+atlas = SubResource("CompressedTexture2D_c84d8")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bmpkc"]
+load_path = "res://.godot/imported/dropper-buttons.png-f689ecaca5633f1fcffd69651746f2c0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmb61"]
+atlas = SubResource("CompressedTexture2D_bmpkc")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_770x0"]
+load_path = "res://.godot/imported/dropper-buttons.png-f689ecaca5633f1fcffd69651746f2c0.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycvef"]
+atlas = SubResource("CompressedTexture2D_770x0")
+region = Rect2(16, 64, 16, 16)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_ppd7t")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -5
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer"]
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = SubResource("GradientTexture2D_tdrj0")
 metadata/_edit_lock_ = true
 
-[node name="TileMap" type="TileMap" parent="CanvasLayer"]
+[node name="TileMap" type="TileMap" parent="BackgroundLayer"]
 scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_2sst1")
 format = 2
 layer_0/tile_data = PackedInt32Array(524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0, 393228, 2, 0, 393229, 2, 0, 393230, 2, 0, 393231, 2, 0)
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer"]
+offset_right = 1280.0
+offset_bottom = 103.0
+color = Color(0.247059, 0.247059, 0.454902, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -62,23 +124,75 @@ layer_0/tile_data = PackedInt32Array(524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 5
 position = Vector2(632, 560)
 shape = SubResource("WorldBoundaryShape2D_x3qct")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(216, 344)
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(242, 528)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("CircleShape2D_pggm6")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_bepe7")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-position = Vector2(3, -113)
-scale = Vector2(4, 4)
-texture = ExtResource("5_ol3rm")
+[node name="PlayerDropper" parent="." instance=ExtResource("6_mu07p")]
+position = Vector2(48, 167)
 
-[node name="Sprite2D2" type="Sprite2D" parent="RigidBody2D"]
-position = Vector2(3, -57)
-scale = Vector2(4, 4)
-texture = ExtResource("6_p7ie6")
+[node name="EnemyDropper" parent="." instance=ExtResource("6_mu07p")]
+position = Vector2(1232, 167)
 
-[node name="Sprite2D3" type="Sprite2D" parent="RigidBody2D"]
-position = Vector2(3, -1)
-scale = Vector2(4, 4)
-texture = ExtResource("7_nfp1j")
+[node name="GUILayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="RedButton" type="TextureButton" parent="GUILayer"]
+offset_top = 12.0
+offset_right = 40.0
+offset_bottom = 52.0
+scale = Vector2(2, 2)
+texture_normal = SubResource("AtlasTexture_y8pe1")
+texture_pressed = SubResource("AtlasTexture_pi7d8")
+stretch_mode = 0
+
+[node name="GreenButton" type="TextureButton" parent="GUILayer"]
+offset_left = 66.0
+offset_top = 12.0
+offset_right = 106.0
+offset_bottom = 52.0
+scale = Vector2(2, 2)
+texture_normal = SubResource("AtlasTexture_s447o")
+texture_pressed = SubResource("AtlasTexture_scgnh")
+stretch_mode = 0
+
+[node name="BlueButton" type="TextureButton" parent="GUILayer"]
+offset_left = 132.0
+offset_top = 12.0
+offset_right = 172.0
+offset_bottom = 52.0
+scale = Vector2(2, 2)
+texture_normal = SubResource("AtlasTexture_o2tw8")
+texture_pressed = SubResource("AtlasTexture_mwd5l")
+stretch_mode = 0
+
+[node name="ResetDropperButton" type="TextureButton" parent="GUILayer"]
+offset_left = 196.0
+offset_top = 12.0
+offset_right = 236.0
+offset_bottom = 52.0
+scale = Vector2(2, 2)
+texture_normal = SubResource("AtlasTexture_wtty1")
+texture_pressed = SubResource("AtlasTexture_ga2oq")
+stretch_mode = 0
+
+[node name="CreateMonsterButton" type="TextureButton" parent="GUILayer"]
+offset_left = 262.0
+offset_top = 12.0
+offset_right = 302.0
+offset_bottom = 52.0
+scale = Vector2(2, 2)
+texture_normal = SubResource("AtlasTexture_dmb61")
+texture_pressed = SubResource("AtlasTexture_ycvef")
+stretch_mode = 0
+
+[node name="AddDropSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_vcc1a")
+
+[connection signal="pressed" from="GUILayer/RedButton" to="." method="_on_red_button_pressed"]
+[connection signal="pressed" from="GUILayer/GreenButton" to="." method="_on_green_button_pressed"]
+[connection signal="pressed" from="GUILayer/BlueButton" to="." method="_on_blue_button_pressed"]
+[connection signal="pressed" from="GUILayer/ResetDropperButton" to="." method="_on_reset_dropper_button_pressed"]
+[connection signal="pressed" from="GUILayer/CreateMonsterButton" to="." method="_on_create_monster_button_pressed"]

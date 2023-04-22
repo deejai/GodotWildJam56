@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://yfveb8geort7"]
+
+[ext_resource type="Script" path="res://Game/Dropper/Dropper.gd" id="1_kqnld"]
+[ext_resource type="Texture2D" uid="uid://3eoka205jtoj" path="res://Assets/Sprites/dropper.png" id="2_yg51v"]
+[ext_resource type="Texture2D" uid="uid://c10sma464oya5" path="res://Assets/Sprites/dropper-filling.png" id="3_u21pb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt24u"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6ffm"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vofqs"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4i1t"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh1kt"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvmny"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8lbu"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6b8n"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trv73"]
+atlas = ExtResource("3_u21pb")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3c2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt24u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6ffm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vofqs")
+}],
+"loop": false,
+"name": &"bottom",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4i1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh1kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvmny")
+}],
+"loop": false,
+"name": &"middle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8lbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6b8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trv73")
+}],
+"loop": false,
+"name": &"top",
+"speed": 5.0
+}]
+
+[node name="Dropper" type="Node2D"]
+script = ExtResource("1_kqnld")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+scale = Vector2(2, 2)
+texture = ExtResource("2_yg51v")
+
+[node name="DropSprite1" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_c3c2m")
+animation = &"top"
+
+[node name="DropSprite2" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_c3c2m")
+animation = &"middle"
+frame = 1
+
+[node name="DropSprite3" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_c3c2m")
+animation = &"bottom"
+frame = 2
