@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq6jma1c66qxs"]
+
+[ext_resource type="Script" path="res://Game/Projectiles/Bullet.gd" id="1_8i5cg"]
+[ext_resource type="Texture2D" uid="uid://dukwj1rwotae7" path="res://Assets/Sprites/projectile-venom.png" id="1_vnymj"]
+[ext_resource type="AudioStream" uid="uid://djiqb1tdpdddh" path="res://Assets/SFX/venom-spit.mp3" id="3_8u48v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5h5mf"]
+radius = 9.0
+
+[node name="Venom" type="Area2D" node_paths=PackedStringArray("sprite", "spawn_player")]
+script = ExtResource("1_8i5cg")
+lifespan = 1.2
+x_speed = 250.0
+y_speed = -50.0
+sprite = NodePath("Sprite2D")
+type = 1
+spawn_player = NodePath("AudioStreamPlayer2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_vnymj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5h5mf")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8u48v")

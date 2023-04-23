@@ -1,13 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnyv288buc1sp"]
+[gd_scene load_steps=14 format=3 uid="uid://bnyv288buc1sp"]
 
 [ext_resource type="Script" path="res://Game/Views/MainMenu/MainMenu.gd" id="1_4ab4u"]
+[ext_resource type="Texture2D" uid="uid://cnascu43s73gi" path="res://Assets/Sprites/dr-chroma.png" id="2_2tu7s"]
+[ext_resource type="Texture2D" uid="uid://80t3c5qi5xs5" path="res://Assets/Sprites/monster-sheet.png" id="3_ttarg"]
+[ext_resource type="Texture2D" uid="uid://cbfri8iq3ygo" path="res://Assets/Sprites/help-sheet.png" id="4_f55ln"]
 
-[sub_resource type="Gradient" id="Gradient_4smil"]
+[sub_resource type="Gradient" id="Gradient_qhbky"]
 colors = PackedColorArray(0.160784, 0.658824, 0.658824, 1, 0.8, 0.972549, 0.8, 0.756863)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_35pq3"]
-gradient = SubResource("Gradient_4smil")
+gradient = SubResource("Gradient_qhbky")
 fill_to = Vector2(0.857798, 0.715596)
+
+[sub_resource type="Gradient" id="Gradient_jdtgy"]
+offsets = PackedFloat32Array(0, 0.520958, 1)
+colors = PackedColorArray(0.705882, 0.0705882, 0.180392, 1, 0.176886, 0.515307, 0.0574487, 1, 0.152941, 0.454902, 0.709804, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gitl5"]
+gradient = SubResource("Gradient_jdtgy")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uow0"]
+atlas = ExtResource("3_ttarg")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_55j5w"]
+load_path = "res://.godot/imported/monster-sheet.png-7ef2235b98f81a838cdb9f2576fb029a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6omf"]
+atlas = SubResource("CompressedTexture2D_55j5w")
+region = Rect2(16, 0, 16, 48)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ldx5n"]
+load_path = "res://.godot/imported/monster-sheet.png-7ef2235b98f81a838cdb9f2576fb029a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkfs7"]
+atlas = SubResource("CompressedTexture2D_ldx5n")
+region = Rect2(32, 0, 16, 48)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_4ab4u")
@@ -24,11 +52,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 1280.0
-offset_bottom = 720.0
+offset_left = 280.0
+offset_top = -104.0
+offset_right = 1016.0
+offset_bottom = 568.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -36,18 +65,59 @@ layout_mode = 2
 [node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-text = "New Game"
+text = "Play"
 
-[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="HowToPlay" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-text = "Options"
+text = "How to Play"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Quit"
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(256, 464)
+scale = Vector2(8, 8)
+texture = ExtResource("2_2tu7s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(640, 44)
+scale = Vector2(20, 1.375)
+texture = SubResource("GradientTexture2D_gitl5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 248.0
+offset_top = 8.0
+offset_right = 998.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 52
+text = "Doctor Chroma's Monster Lab"
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(720, 576)
+scale = Vector2(-8, 8)
+texture = SubResource("AtlasTexture_7uow0")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(936, 560)
+scale = Vector2(-8, 8)
+texture = SubResource("AtlasTexture_q6omf")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(1168, 528)
+scale = Vector2(-8, 8)
+texture = SubResource("AtlasTexture_fkfs7")
+
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+
+[node name="HelpSprite" type="Sprite2D" parent="OverlayLayer"]
+visible = false
+position = Vector2(616, 360)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("4_f55ln")
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HowToPlay" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

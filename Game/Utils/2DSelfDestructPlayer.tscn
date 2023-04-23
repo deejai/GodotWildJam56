@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b15xbcu0r6g0e"]
+
+[ext_resource type="Script" path="res://Game/Utils/2DSelfDestructPlayer.gd" id="1_82q8c"]
+[ext_resource type="AudioStream" uid="uid://h8rlr4ai171j" path="res://Assets/SFX/die.mp3" id="1_wumjk"]
+
+[node name="2DSelfDestructPlayer" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_wumjk")
+script = ExtResource("1_82q8c")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

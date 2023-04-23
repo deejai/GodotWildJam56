@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2cas3qlfqyvj"]
+[gd_scene load_steps=20 format=3 uid="uid://c2cas3qlfqyvj"]
 
 [ext_resource type="Script" path="res://Game/Monster/Monster.gd" id="1_6ptnd"]
 [ext_resource type="Texture2D" uid="uid://80t3c5qi5xs5" path="res://Assets/Sprites/monster-sheet.png" id="2_6kd7w"]
@@ -84,7 +84,46 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_wc552"]
+colors = PackedColorArray(0.521569, 0.521569, 0.521569, 0.294118, 0.403922, 0.403922, 0.403922, 0.27451)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_beubh"]
+gradient = SubResource("Gradient_wc552")
+height = 4
+
+[sub_resource type="Gradient" id="Gradient_7ukm4"]
+colors = PackedColorArray(1, 1, 1, 0.372549, 0.439216, 0.45098, 0.470588, 0.521569)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gfhvs"]
+gradient = SubResource("Gradient_7ukm4")
+height = 4
+fill_from = Vector2(0.558252, 0)
+fill_to = Vector2(0.543689, 1)
+
+[sub_resource type="Curve" id="Curve_y1ssk"]
+max_value = 3.0
+_data = [Vector2(0.0120482, 0.309091), 0.0, 0.0, 0, 0, Vector2(0.993976, 2.82091), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j354i"]
+curve = SubResource("Curve_y1ssk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7xf6c"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 15.0
+gravity = Vector3(0, -16, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_j354i")
+color = Color(0.054902, 0.945098, 0.0313726, 0.639216)
+
 [node name="Monster" type="RigidBody2D"]
+lock_rotation = true
 script = ExtResource("1_6ptnd")
 
 [node name="HeadSprite" type="AnimatedSprite2D" parent="."]
@@ -106,3 +145,35 @@ animation = &"legs"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
+
+[node name="MoveTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="GroundedRay" type="RayCast2D" parent="."]
+position = Vector2(0, 32)
+target_position = Vector2(0, 19)
+collision_mask = 2
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+offset_left = -34.0
+offset_top = -102.0
+offset_right = 30.0
+offset_bottom = -38.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_beubh")
+texture_progress = SubResource("GradientTexture2D_gfhvs")
+tint_progress = Color(0, 1, 0, 1)
+
+[node name="VenomParticles" type="GPUParticles2D" parent="."]
+z_index = 5
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_7xf6c")
+lifetime = 1.5
+preprocess = 1.0
+trail_lifetime = 0.78
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

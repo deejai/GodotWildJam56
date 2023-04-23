@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtyj7mdxx1yaa"]
+
+[ext_resource type="Script" path="res://Game/Projectiles/Bullet.gd" id="1_ej48x"]
+[ext_resource type="Texture2D" uid="uid://clf8xn4uiibxl" path="res://Assets/Sprites/projectile-horn.png" id="2_4n8qn"]
+[ext_resource type="AudioStream" uid="uid://dk0atjtdfspbm" path="res://Assets/SFX/bullhorn-shoot.mp3" id="3_l1apv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk05v"]
+size = Vector2(31, 16)
+
+[node name="BullHorn" type="Area2D" node_paths=PackedStringArray("sprite", "spawn_player")]
+script = ExtResource("1_ej48x")
+lifespan = 0.6
+x_speed = 750.0
+y_speed = 25.0
+sprite = NodePath("Sprite2D")
+spawn_player = NodePath("AudioStreamPlayer2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_jk05v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_4n8qn")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_l1apv")

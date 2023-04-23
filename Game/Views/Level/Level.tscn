@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b4m16q4iwtgj5"]
+[gd_scene load_steps=45 format=3 uid="uid://b4m16q4iwtgj5"]
 
 [ext_resource type="Script" path="res://Game/Views/Level/Level.gd" id="1_ppd7t"]
 [ext_resource type="Texture2D" uid="uid://dqpfqfjwkwie" path="res://Assets/Sprites/tile-brown1.png" id="2_f2yb1"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cyfxes5nn006r" path="res://Assets/Sprites/tile-grass1.png" id="4_ogliw"]
 [ext_resource type="PackedScene" uid="uid://yfveb8geort7" path="res://Game/Dropper/Dropper.tscn" id="6_mu07p"]
 [ext_resource type="Texture2D" uid="uid://cmqu6157wpx2e" path="res://Assets/Sprites/dropper-buttons.png" id="7_381gt"]
+[ext_resource type="Texture2D" uid="uid://cbfri8iq3ygo" path="res://Assets/Sprites/help-sheet.png" id="8_nh0sr"]
+[ext_resource type="Texture2D" uid="uid://dlct8a3nksbbe" path="res://Assets/Sprites/button-help.png" id="8_rexc1"]
 [ext_resource type="AudioStream" uid="uid://7xj0cctx8r87" path="res://Assets/SFX/spit.mp3" id="8_vcc1a"]
+[ext_resource type="AudioStream" uid="uid://dhbsrh8rrdv8g" path="res://Assets/Music/simple_loop.mp3" id="10_uacsk"]
 
 [sub_resource type="Gradient" id="Gradient_6j8qk"]
 colors = PackedColorArray(0.931549, 0.787493, 0.949042, 1, 0.495468, 0.906191, 0.987032, 1)
@@ -33,9 +36,9 @@ sources/0 = SubResource("TileSetAtlasSource_hasm7")
 sources/1 = SubResource("TileSetAtlasSource_gwnt7")
 sources/2 = SubResource("TileSetAtlasSource_r68df")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x3qct"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yc2bs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bepe7"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x3qct"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8pe1"]
 atlas = ExtResource("7_381gt")
@@ -95,6 +98,48 @@ load_path = "res://.godot/imported/dropper-buttons.png-f689ecaca5633f1fcffd69651
 atlas = SubResource("CompressedTexture2D_770x0")
 region = Rect2(16, 64, 16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfy32"]
+size = Vector2(703, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wh86u"]
+size = Vector2(703, 115)
+
+[sub_resource type="Gradient" id="Gradient_tj2pc"]
+colors = PackedColorArray(0.521569, 0.521569, 0.521569, 0.294118, 0.403922, 0.403922, 0.403922, 0.27451)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6usst"]
+gradient = SubResource("Gradient_tj2pc")
+width = 256
+height = 32
+
+[sub_resource type="Gradient" id="Gradient_kpgcx"]
+colors = PackedColorArray(0, 0.898039, 0, 0.572549, 0, 0.337255, 0.243137, 0.521569)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_glq7n"]
+gradient = SubResource("Gradient_kpgcx")
+width = 256
+height = 32
+fill_from = Vector2(0.558252, 0)
+fill_to = Vector2(0.543689, 1)
+
+[sub_resource type="Gradient" id="Gradient_higg0"]
+colors = PackedColorArray(0.521569, 0.521569, 0.521569, 0.294118, 0.403922, 0.403922, 0.403922, 0.27451)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_axre4"]
+gradient = SubResource("Gradient_higg0")
+width = 256
+height = 32
+
+[sub_resource type="Gradient" id="Gradient_s4d5j"]
+colors = PackedColorArray(0.870588, 0, 0, 0.686275, 0.207843, 0.0980392, 0.243137, 0.521569)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_080v5"]
+gradient = SubResource("Gradient_s4d5j")
+width = 256
+height = 32
+fill_from = Vector2(0.558252, 0)
+fill_to = Vector2(0.543689, 1)
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_ppd7t")
 
@@ -118,17 +163,19 @@ offset_right = 1280.0
 offset_bottom = 103.0
 color = Color(0.247059, 0.247059, 0.454902, 1)
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(593, 104)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_yc2bs")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(632, 560)
 shape = SubResource("WorldBoundaryShape2D_x3qct")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(242, 528)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource("RectangleShape2D_bepe7")
 
 [node name="PlayerDropper" parent="." instance=ExtResource("6_mu07p")]
 position = Vector2(48, 167)
@@ -191,8 +238,95 @@ stretch_mode = 0
 [node name="AddDropSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_vcc1a")
 
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 1.3
+
+[node name="PlayerGoal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGoal"]
+position = Vector2(-72, 362.5)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_dfy32")
+
+[node name="EnemyGoal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyGoal"]
+position = Vector2(1347.5, 361.5)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_wh86u")
+
+[node name="PlayerHPBar" type="TextureProgressBar" parent="."]
+offset_left = 9.0
+offset_top = 681.0
+offset_right = 278.0
+offset_bottom = 719.0
+value = 100.0
+texture_under = SubResource("GradientTexture2D_6usst")
+texture_progress = SubResource("GradientTexture2D_glq7n")
+
+[node name="EnemyHPBar" type="TextureProgressBar" parent="."]
+offset_left = 1013.0
+offset_top = 681.0
+offset_right = 1282.0
+offset_bottom = 719.0
+value = 100.0
+fill_mode = 1
+texture_under = SubResource("GradientTexture2D_axre4")
+texture_progress = SubResource("GradientTexture2D_080v5")
+
+[node name="PlayerLabel" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 656.0
+offset_right = 130.0
+offset_bottom = 682.0
+text = "Doctor Chroma"
+
+[node name="EnemyLabel" type="Label" parent="."]
+offset_left = 1163.0
+offset_top = 653.0
+offset_right = 1266.0
+offset_bottom = 679.0
+text = "The Machine"
+
+[node name="MonsterButtonTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="HelpButton" type="TextureButton" parent="."]
+offset_left = 339.0
+offset_top = 27.0
+offset_right = 355.0
+offset_bottom = 43.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("8_rexc1")
+
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="HelpSprite" type="Sprite2D" parent="OverlayLayer"]
+visible = false
+position = Vector2(647, 359)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("8_nh0sr")
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 1154.0
+offset_top = 32.0
+offset_right = 1265.0
+offset_bottom = 63.0
+text = "Quit to Menu"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_uacsk")
+autoplay = true
+
 [connection signal="pressed" from="GUILayer/RedButton" to="." method="_on_red_button_pressed"]
 [connection signal="pressed" from="GUILayer/GreenButton" to="." method="_on_green_button_pressed"]
 [connection signal="pressed" from="GUILayer/BlueButton" to="." method="_on_blue_button_pressed"]
 [connection signal="pressed" from="GUILayer/ResetDropperButton" to="." method="_on_reset_dropper_button_pressed"]
 [connection signal="pressed" from="GUILayer/CreateMonsterButton" to="." method="_on_create_monster_button_pressed"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="body_entered" from="PlayerGoal" to="." method="_on_player_goal_body_entered"]
+[connection signal="body_entered" from="EnemyGoal" to="." method="_on_enemy_goal_body_entered"]
+[connection signal="timeout" from="MonsterButtonTimer" to="." method="_on_monster_button_timer_timeout"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://c7vi53rk7qemj"]
+
+[ext_resource type="Script" path="res://Game/Views/YouWin/YouWin.gd" id="1_61j4c"]
+[ext_resource type="Texture2D" uid="uid://cnascu43s73gi" path="res://Assets/Sprites/dr-chroma.png" id="1_whlgm"]
+[ext_resource type="Texture2D" uid="uid://80t3c5qi5xs5" path="res://Assets/Sprites/monster-sheet.png" id="2_6x8a4"]
+
+[sub_resource type="Gradient" id="Gradient_lmbry"]
+offsets = PackedFloat32Array(0, 0.520958, 1)
+colors = PackedColorArray(0.705882, 0.0705882, 0.180392, 1, 0.176886, 0.515307, 0.0574487, 1, 0.152941, 0.454902, 0.709804, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gmn5h"]
+gradient = SubResource("Gradient_lmbry")
+
+[sub_resource type="Gradient" id="Gradient_4smil"]
+colors = PackedColorArray(0.160784, 0.658824, 0.658824, 1, 0.8, 0.972549, 0.8, 0.756863)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_osh0j"]
+gradient = SubResource("Gradient_4smil")
+fill_to = Vector2(0.857798, 0.715596)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edkda"]
+atlas = ExtResource("2_6x8a4")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5o00r"]
+load_path = "res://.godot/imported/monster-sheet.png-7ef2235b98f81a838cdb9f2576fb029a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqgly"]
+atlas = SubResource("CompressedTexture2D_5o00r")
+region = Rect2(16, 0, 16, 48)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x7h6o"]
+load_path = "res://.godot/imported/monster-sheet.png-7ef2235b98f81a838cdb9f2576fb029a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l5iw"]
+atlas = SubResource("CompressedTexture2D_x7h6o")
+region = Rect2(32, 0, 16, 48)
+
+[node name="YouWin" type="Node2D"]
+script = ExtResource("1_61j4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(256, 464)
+scale = Vector2(8, 8)
+texture = ExtResource("1_whlgm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(640, 44)
+scale = Vector2(20, 1.375)
+texture = SubResource("GradientTexture2D_gmn5h")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 1130.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 52
+text = "You won! The machine was defeated!"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = SubResource("GradientTexture2D_osh0j")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(720, 576)
+scale = Vector2(-8, 8)
+texture = SubResource("AtlasTexture_edkda")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(936, 560)
+scale = Vector2(-8, 8)
+texture = SubResource("AtlasTexture_gqgly")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(1168, 528)
+scale = Vector2(-8, 8)
+texture = SubResource("AtlasTexture_2l5iw")
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_left = 428.0
+offset_top = 226.0
+offset_right = 943.0
+offset_bottom = 301.0
+theme_override_font_sizes/font_size = 48
+text = "Back to Menu"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]

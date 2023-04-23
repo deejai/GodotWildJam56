@@ -2,11 +2,15 @@ extends Node2D
 
 class_name Dropper
 
+var alliance: Main.ALLIANCE = Main.ALLIANCE.PLAYER
+
 var drops: Array[Monster.TYPE] = []
 
 var drop_sprites : Array[AnimatedSprite2D] = []
 
 var monster_scene: PackedScene = preload("res://Game/Monster/Monster.tscn")
+
+@onready var produce_monster_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,9 +51,11 @@ func produce_monster():
 		return null
 
 	var monster = monster_scene.instantiate()
-	print(drops)
+	monster.alliance = alliance
 	monster.head_type = drops[0]
 	monster.body_type = drops[1]
 	monster.leg_type = drops[2]
+
+	produce_monster_player.play()
 
 	return monster
